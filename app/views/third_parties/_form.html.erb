@@ -1,0 +1,24 @@
+<%= simple_form_for(@third_party) do |f| %>
+  <% if @third_party.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@third_party.errors.count, "error") %> prohibited this third_party from being saved:</h2>
+
+      <ul>
+      <% @third_party.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.input :name %>
+  </div>
+
+  <div class="field">
+    <%= f.association :parent %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Import:</b>
+  <%= @account_line.import %>
+</p>
+
+<p>
+  <b>Import line:</b>
+  <%= @account_line.import_line %>
+</p>
+
+
+<%= link_to 'Edit', edit_account_line_path(@account_line) %> |
+<%= link_to 'Back', account_lines_path %>

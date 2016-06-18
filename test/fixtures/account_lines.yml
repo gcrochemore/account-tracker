@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  import: MyString
+  import_line: MyString
+
+two:
+  import: MyString
+  import_line: MyString

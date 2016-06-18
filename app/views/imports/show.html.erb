@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nom :</b>
+  <%= @import.name %>
+</p>
+<p>
+  <b>Fichier</b>
+  <%= @import.file.to_s %>
+</p>
+
+
+<%= link_to 'Edit', edit_import_path(@import) %> |
+<%= link_to 'Back', imports_path %>

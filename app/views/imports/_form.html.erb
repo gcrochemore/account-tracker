@@ -1,0 +1,30 @@
+<% require 'csv' %> 
+<%= simple_form_for(@import, html: { multipart: true}) do |f| %>
+  <% if @import.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@import.errors.count, "error") %> prohibited this import from being saved:</h2>
+
+      <ul>
+      <% @import.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.input :name %>
+  </div>
+  <div class="field">
+    <%= f.input :file, as: :file %>
+  </div>
+
+<%= 
+  CSV::Reader.parse(File.open(@import.file, 'rb')) do |row|
+    row[0]
+  end
+%>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
