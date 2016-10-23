@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+  before_filter :set_account, only: [:show, :edit, :update, :destroy]
   # GET /accounts
   # GET /accounts.json
   def index
@@ -93,4 +94,14 @@ class AccountsController < ApplicationController
     @account.update_attribute(:activated, true)
     redirect_to action: :index, notice: t(:record_activated)
   end
+
+  private
+    def set_account
+      @account = Account.find(params[:id])
+      @q = @account.all_lines.ransack(params[:q])
+      @total_categorie = @q.result
+      @account_lines = @q.result.page(params[:page])
+    end
 end
+
+

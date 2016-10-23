@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nom:</b>
+  <%= @label.name %>
+</p>
+<p>
+  <b>Parent:</b>
+  <%= @label.parent.andand.name %>
+</p>
+
+<%= render partial: 'show_account_lines', locals: { account_lines: @label.all_lines(params[:page]), account: nil, search: Label.ransack(params[:q]) } %>
+
+<%= link_to 'Edit', edit_label_path(@label) %> |
+<%= link_to 'Back', labels_path %>

@@ -2,8 +2,8 @@
 
 <table>
   <tr>
-    <th>Import</th>
-    <th>Import line</th>
+    <th>Tiers</th>
+    <th>Montant</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,8 +11,8 @@
 
 <% @account_lines.each do |account_line| %>
   <tr>
-    <td><%= account_line.import %></td>
-    <td><%= account_line.import_line %></td>
+    <td><%= account_line.andand.third_party.andand.name %></td>
+    <td><%= account_line.amount %></td>
     <td><%= link_to 'Show', account_line %></td>
     <td><%= link_to 'Edit', edit_account_line_path(account_line) %></td>
     <td><%= link_to 'Destroy', account_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>

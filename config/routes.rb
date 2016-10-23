@@ -3,7 +3,8 @@ AccountTracker::Application.routes.draw do
             :imports,
             :account_lines,
             :third_parties,
-            :accounts do
+            :accounts,
+            :labels do
     member do
       get 'deactivate'
       get 'activate'

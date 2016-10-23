@@ -1,5 +1,98 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading pull-left">
+        <%= @account.name %>  <%= link_to 'Edit', edit_account_path(@account) %> | <%= link_to 'Back', accounts_path %>
+      </div>
+      <div class="panel-body">    
+        <br><br>
+        <strong>Propriétaire : </strong><%= @account.owner %><br>
+        <strong>Banque : </strong><%= @account.bank.andand.name %><br>
+        <strong>Montant initial : </strong><%= @account.initial_amount %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="balance <%= @account.balance < 0 ? "balance-negative" : "balance-positive" %>">
+      <%= @account.balance %> €
+      <a class='btn btn-primary' data-toggle="modal"href="#add_account_line">Ajouter</a>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading pull-left">
+        Filtre
+      </div>
+      <div class="panel-body">
+        Date : Du <%= @q.transaction_date_gteq.andand.strftime("%d/%m/%Y") %> 
+        au <%= @q.transaction_date_lteq.andand.strftime("%d/%m/%Y") %><br>
+        <a class='btn btn-xs btn-info' data-toggle="modal"href="#filter_account_lines">Filtrer</a>
+        <a class='btn btn-xs btn-secondary' href="<%= account_path %>">Reinitialiser</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= render 'form' %>
-<%= link_to 'Edit', edit_account_path(@account) %> |
-<%= link_to 'Back', accounts_path %>
+<%# TABS %>
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#account_lines" data-toggle="tab">Détails comptes</a></li>
+    <li><a href="#labels" data-toggle="tab">Par catégories</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="account_lines">
+      <%= render partial: 'account_lines/show_account_lines', locals: { account_lines: @account_lines, account: @account, search: @q } %>
+    </div>
+    <div class="tab-pane" id="labels">
+      <%= render partial: 'labels/show_labels_amount' %>
+    </div>
+  </div>
+</div>
+
+<%# MODAL %>
+<%## SEARCH %>
+<%= search_form_for @q, url: account_path do |f| %>
+<div class="modal fade" id="filter_account_lines">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        Filtrer
+      </div>
+      <div class="modal-body">
+          <p>
+            <%= f.label :transaction_date %>
+            <%= f.search_field :transaction_date_gteq %>
+            <%= f.search_field :transaction_date_lteq %>
+
+            <%= f.label :name_cont %>
+            <%= f.search_field :name_cont %>
+          </p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-default" data-dismiss="modal">Annuler</a>
+        <input type="submit" value="Filtrer" class="btn btn-primary">
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<%## SEARCH %>
+<div class="modal fade" id="add_account_line">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        Nouveau
+      </div>
+      <div class="modal-body">
+        <%= 
+          @account_line = AccountLine.new
+          render partial: 'account_lines/form' 
+        %>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-default" data-dismiss="modal">Annuler</a>
+      </div>
+    </div>
+  </div>
+</div>

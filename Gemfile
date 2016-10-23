@@ -44,6 +44,7 @@ gem 'andand'
 
 gem 'seed_dump'
 
+gem 'will_paginate'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -58,3 +59,5 @@ gem 'seed_dump'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'test-unit'

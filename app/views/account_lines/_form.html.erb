@@ -1,4 +1,4 @@
-<%= form_for(@account_line) do |f| %>
+<%= simple_form_for(@account_line) do |f| %>
   <% if @account_line.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@account_line.errors.count, "error") %> prohibited this account_line from being saved:</h2>
@@ -11,13 +11,48 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :import %><br />
-    <%= f.text_field :import %>
+  <div class="row">
+    <div class="col-md-9">
+      <%= f.input :name %><br />
+    </div>
+    <div class="col-md-3">
+      <%= f.input :amount %><br />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.association :target_account %><br />
+    </div>
+    <div class="col-md-6">
+      <%= f.association :source_account %><br />
+    </div>
+  </div>
+ <div class="row">
+    <div class="col-md-12">
+      <%= f.association :label %><br />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.label :debit_date %><br />
+    </div>
+    <div class="col-md-8">
+      <%= f.input :debit_date, label: false %><br />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.label :transaction_date %><br />
+    </div>
+    <div class="col-md-8">
+      <%= f.input :transaction_date, label: false %><br />
+    </div>
   </div>
   <div class="field">
-    <%= f.label :import_line %><br />
-    <%= f.text_field :import_line %>
+    <%= f.association :third_party %><br />
+  </div>
+  <div class="field">
+    <%= f.input :activated %><br />
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -4,7 +4,7 @@ class ThirdPartiesController < ApplicationController
   respond_to :html
 
   def index
-    @third_parties = ThirdParty.all
+    @third_parties = ThirdParty.order(:name).all
     respond_with(@third_parties)
   end
 
@@ -27,7 +27,19 @@ class ThirdPartiesController < ApplicationController
   end
 
   def update
-    @third_party.update_attributes(params[:third_party])
+    if !params[:third_party][:merge_id].blank?
+      #On merge les données
+      to_update = AccountLine.where(third_party_id: params[:id])
+      to_update.each do |update|
+        update.third_party_id = params[:third_party][:merge_id]
+        update.save
+      end
+      #on supprime l'ancien enregistrement
+      @third_party.delete
+      @third_party = ThirdParty.find(params[:third_party][:merge_id])
+    else
+      @third_party.update_attributes(params[:third_party])
+    end   
     respond_with(@third_party)
   end
 

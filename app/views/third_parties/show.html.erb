@@ -3,7 +3,11 @@
 <p>
   <b>Nom:</b>
   <%= @third_party.name %>
+  <b>Label:</b>
+  <%= @third_party.label.andand.name %>
 </p>
+
+<%= render partial: 'account_lines/show_account_lines', locals: { account_lines: @third_party.all_lines(params[:page]), account: nil, search: ThirdParty.ransack(params[:q]) } %>
 
 <%= link_to 'Edit', edit_third_party_path(@third_party) %> |
 <%= link_to 'Back', third_parties_path %>

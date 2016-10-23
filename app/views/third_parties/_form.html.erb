@@ -16,9 +16,17 @@
   </div>
 
   <div class="field">
+    <%= f.association :label %>
+  </div>
+  <div class="field">
     <%= f.association :parent %>
+  </div>
+  <div class="field">
+    <%= f.input :merge_id, collection: ThirdParty.order(:name) %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<%= render partial: 'account_lines/show_account_lines', locals: { account_lines: @third_party.all_lines(params[:page]), account: nil, search: ThirdParty.ransack(params[:q]) } %>

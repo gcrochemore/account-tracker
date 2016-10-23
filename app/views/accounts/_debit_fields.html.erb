@@ -1,0 +1,14 @@
+<div class="col-md-12">
+  <div class="account_line_fields">
+    <div class="field">
+      <div class="row">
+        <div class="col-md-2"><%= f.input :transaction_date, label: false, as: :string, input_html: { size: "15%" } %></div>
+        <div class="col-md-2"><%= f.input :debit_date, label: false, as: :string, input_html: { size: "15%" } %></div>
+        <div class="col-md-2"><%= f.association :third_party, label: false, input_html: { width: "100%" }  %></div>
+        <div class="col-md-4"><%= f.input :name, label: false %></div>
+        <div class="col-md-1"><%= f.input :amount, label: false, input_html: { width: "100%" } %></div>
+        <div class="col-md-1"><%= link_to_remove_association '<span class="glyphicon glyphicon-remove"></span>'.html_safe, f, wrapper_class: 'account_line_fields' %></div>
+      </div>
+    </div>
+  </div>
+</div>

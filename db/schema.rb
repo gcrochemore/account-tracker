@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160512201024) do
+ActiveRecord::Schema.define(:version => 20160927164501) do
 
   create_table "account_lines", :force => true do |t|
     t.string   "name"
@@ -21,8 +21,19 @@ ActiveRecord::Schema.define(:version => 20160512201024) do
     t.integer  "third_party_id"
     t.float    "amount"
     t.boolean  "activated"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "target_account_id"
+    t.integer  "source_account_id"
+    t.integer  "label_id"
+  end
+
+  create_table "account_lines_labels", :force => true do |t|
+    t.integer  "account_line_id"
+    t.integer  "label_id"
+    t.boolean  "activated"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "accounts", :force => true do |t|
@@ -54,6 +65,14 @@ ActiveRecord::Schema.define(:version => 20160512201024) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "labels", :force => true do |t|
+    t.string   "name"
+    t.boolean  "activated"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "parent_label_id"
+  end
+
   create_table "third_parties", :force => true do |t|
     t.string   "name"
     t.integer  "owner_id"
@@ -61,6 +80,8 @@ ActiveRecord::Schema.define(:version => 20160512201024) do
     t.boolean  "activated"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "labels_id"
+    t.integer  "label_id"
   end
 
   create_table "users", :force => true do |t|

@@ -1,0 +1,28 @@
+<h1>Listing label</h1>
+
+<table class="table table-striped table-condensed">
+  <tr>
+    <th>Name</th>
+    <th>Parent</th>
+    <th>Prix</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @labels.each do |label| %>
+  <tr>
+    <td><%= label.name %></td>
+    <td><%= label.parent.andand.name %></td>
+    <td><%= label.prix_total %> €</td>
+    <td><%= link_to 'Show', label %></td>
+    <td><%= link_to 'Edit', edit_label_path(label) %></td>
+    <td><%= link_to 'Destroy', label, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New label', new_label_path %>
+
+

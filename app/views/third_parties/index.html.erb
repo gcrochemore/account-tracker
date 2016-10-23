@@ -1,9 +1,11 @@
-<h1>Listing third_parties</h1>
+<h1>Listing third_parties<span class="badge"><%= @third_parties.count %></span></h1>
 
 <table class="table table-striped table-condensed">
   <tr>
     <th>Name</th>
     <th>Parent</th>
+    <th>Label</th>
+    <th>Total</th>
     <th></th>
     <th></th>
   </tr>
@@ -12,6 +14,8 @@
   <tr>
     <td><%= third_party.name %></td>
     <td><%= third_party.parent.andand.name %></td>
+    <td><%= third_party.label.andand.name %></td>
+    <td><%= third_party.prix_total %>€</td>
     <td><%= link_to 'Show', third_party %></td>
     <td><%= link_to 'Edit', edit_third_party_path(third_party) %></td>
     <td><%= link_to 'Destroy', third_party, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -22,12 +22,19 @@ class AccountLinesController < ApplicationController
 
   def create
     @account_line = AccountLine.new(params[:account_line])
+    if @account_line.label.nil? && !@account_line.third_party.label.nil?
+      @account_line.label = @account_line.third_party.label
+    end
     @account_line.save
     respond_with(@account_line)
   end
 
   def update
     @account_line.update_attributes(params[:account_line])
+    if @account_line.label.nil? && !@account_line.third_party.label.nil?
+      @account_line.label = @account_line.third_party.label
+      @account_line.save
+    end
     respond_with(@account_line)
   end
 

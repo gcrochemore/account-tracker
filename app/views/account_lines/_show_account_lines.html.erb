@@ -1,0 +1,35 @@
+<%= will_paginate account_lines %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= sort_link(search, :transaction_date, 'Date operation') %> / <%= sort_link(search, :debit_date, 'Date débit') %></th>
+      <th><%= sort_link(search, :third_party_name, 'Tiers') %> / <%= sort_link(search, :label_name, 'Label') %> / <%= sort_link(search, :name, 'Détails') %></th>
+      <th><%= sort_link(search, :amount, 'Montant') %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+<% montant_total = 0 %>
+<% account_lines.each do |f| %>
+  <% montant_ligne = (account==f.source_account)? -1*f.amount : f.amount %>
+  <% montant_total = montant_total + montant_ligne %>
+  <tr>
+    <td>
+      <%= f.transaction_date.strftime("%d/%m/%Y") %><br><%= (f.debit_date != f.transaction_date) ? f.debit_date.andand.strftime("%d/%m/%Y") : '' %>
+    </td>
+    <td>
+      <strong><%= f.third_party.andand.name %></strong> - <%= f.label.nil? ? 'Aucun' : f.label.andand.name %> : 
+      <%= f.name %>
+    </td>
+    <td>
+      <%= montant_ligne %>€
+    </td>    
+    <td><%= link_to 'Edit', edit_account_line_path(f) %></td>
+  </tr>
+<% end %>
+  <tr>
+    <td colspan='4'>
+      <%= will_paginate account_lines %>
+    </td>
+  </tr>
+</table>
