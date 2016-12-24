@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.16'
 
@@ -22,7 +22,7 @@ end
 
 gem 'jquery-rails'
 
-gem 'therubyracer'
+#gem 'therubyracer'
 gem 'execjs'
 
 gem 'devise'

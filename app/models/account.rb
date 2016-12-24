@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  attr_accessible :name, :owner_id, :bank_id, :activated, :account_lines_attributes, :initial_amount, :debits_attributes, :credits_attributes
+  attr_accessible :name, :owner_id, :bank_id, :activated, :account_lines_attributes, :initial_amount, :debits_attributes, :credits_attributes, :id, :created_at, :updated_at
 
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
   belongs_to :bank, class_name: 'ThirdParty', foreign_key: 'bank_id'

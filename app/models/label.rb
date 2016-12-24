@@ -1,6 +1,6 @@
 class Label < ActiveRecord::Base
   scope :without_parent, -> {where(parent_label_id: nil)}
-  attr_accessible :name, :parent_label_id
+  attr_accessible :name, :parent_label_id, :id, :created_at, :updated_at, :activated
   default_scope order(:name)
   belongs_to :parent, class_name: 'Label', foreign_key: 'parent_label_id'
   has_many :children, class_name: 'Label', foreign_key: 'parent_label_id'

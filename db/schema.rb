@@ -80,7 +80,6 @@ ActiveRecord::Schema.define(:version => 20160927164501) do
     t.boolean  "activated"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "labels_id"
     t.integer  "label_id"
   end
 
